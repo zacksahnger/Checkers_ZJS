@@ -36,55 +36,35 @@ void Board::setTextAndBackgroundColor(int textColor, int textBackgroundColor) {
 	SetConsoleTextAttribute(hConsole, ColorAttribute);
 }
 
-void Board::printWhiteSquare() {
-	//Piece foundPiece = checkPositionForPiece();
-	setTextAndBackgroundColor(BLACK, WHITE);
-	cout << ("  ");
-}
+void Board::printSquare(int rowIndex, int colIndex) {
+	
 
-void Board::printBlackSquare() {
-	setTextAndBackgroundColor(WHITE, BLACK);
-	cout << ("  ");
-}
-
-void Board::printRowBlackFirst() {
-	for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
-		if (rowIndex % 2) {
-			printBlackSquare();
+	if ((rowIndex + colIndex) % 2) {
+		
+		if (checkPositionForPiece(rowIndex, colIndex)) {
+			//set color
+			setTextAndBackgroundColor(pieces[rowIndex][colIndex].getColor(), BLACK);
+			//check if type is man or king 
+			cout << "O ";
 		}
 		else {
-			printWhiteSquare();
+			setTextAndBackgroundColor(WHITE, BLACK);
+			cout << "  ";
 		}
+
+		//pieces[rowIndex][colIndex].getColor()
 	}
-	cout << endl;
-}
-void Board::printRowWhiteFirst() {
-	for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
-		if (!(rowIndex % 2)) {
-			printBlackSquare();
-		}
-		else {
-			printWhiteSquare();
-		}
+	else {
+		setTextAndBackgroundColor(BLACK, WHITE);
+		cout << ("  ");
 	}
-	cout << endl;
+
 }
 
 
 void Board::printRow(int rowIndex) {
-	bool rowIsOdd = rowIndex % 2;
 	for (int columnIndex = 0; columnIndex < 8; columnIndex++) {
-		bool columnIsOdd = columnIndex % 2;
-
-		//if (checkPositionForPiece({ rowIndex,columnIndex }) == -1) {
-			//if ((rowIsOdd && !columnIsOdd) || (!rowIsOdd && columnIsOdd)) {
-			  if((rowIndex+columnIndex) % 2){
-				printBlackSquare();
-			}
-			else {
-				printWhiteSquare();
-			}
-		//}
+		printSquare(rowIndex, columnIndex);
 
 	}
 
@@ -96,14 +76,6 @@ void Board::printBoard() {
 		setTextAndBackgroundColor(WHITE, BLACK);
 		cout << rowIndex << " ";
 		printRow(rowIndex);
-		/*
-		if ((columnIndex % 2)) {
-			printRowWhiteFirst();
-		}
-		else {
-			printRowBlackFirst();
-		}
-		*/
 	}
 	cout << endl;
 	setTextAndBackgroundColor(WHITE, BLACK);
@@ -113,18 +85,16 @@ void Board::populatePieces() {
 
 	//instantiate / set piece positions
 	for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
-		bool rowIsOdd = rowIndex % 2;
 
 		for (int columnIndex = 0; columnIndex < 8; columnIndex++) {
-			bool columnIsOdd = columnIndex % 2;
 
 			if (rowIndex != 3 && rowIndex != 4) { //don't populate center rows with pieces
-
-				if ((rowIsOdd && !columnIsOdd) || (!rowIsOdd && columnIsOdd)) {
-					if(rowIndex < 3)
-						this->pieces.push_back(Piece(LIGHTRED, { rowIndex,columnIndex }));
+			
+				if ((rowIndex + columnIndex) % 2) {
+					if (rowIndex < 3)
+						this->pieces[rowIndex][columnIndex] = Piece(LIGHTRED);
 					else
-						this->pieces.push_back(Piece(GRAY, { rowIndex,columnIndex }));
+						this->pieces[rowIndex][columnIndex] = Piece(GRAY);
 				}
 					
 			}
@@ -133,6 +103,17 @@ void Board::populatePieces() {
 
 }
 
+bool Board::checkPositionForPiece(int rowPosition, int colPosition) {
+	if (this->pieces[rowPosition][colPosition].getColor() != -1) {
+		return true;
+	}
+	return false;
+
+}
+Piece Board::getPieceInfo(int rowPosition, int colPosition) {
+	return this->pieces[rowPosition][colPosition];
+}
+/*
 int Board::checkPositionForPiece(vector<int>position) {
 	for (int i = 0; i < 24; i++) {
 		if (pieces[i].getPosition() == position) {
@@ -142,3 +123,4 @@ int Board::checkPositionForPiece(vector<int>position) {
 	return -1;
 	
 }
+*/
