@@ -39,13 +39,13 @@ void Board::setTextAndBackgroundColor(int textColor, int textBackgroundColor) {
 void Board::printSquare(int rowIndex, int colIndex) {
 	
 
-	if ((rowIndex + colIndex) % 2) {
+	if ((rowIndex + colIndex) % 2) { //black background
 		
 		if (checkPositionForPiece(rowIndex, colIndex)) {
 			//set color
 			setTextAndBackgroundColor(pieces[rowIndex][colIndex].getColor(), BLACK);
 			//check if type is man or king 
-			cout << "O ";
+			cout << "O" << " ";
 		}
 		else {
 			setTextAndBackgroundColor(WHITE, BLACK);
@@ -54,7 +54,7 @@ void Board::printSquare(int rowIndex, int colIndex) {
 
 		//pieces[rowIndex][colIndex].getColor()
 	}
-	else {
+	else { //white background
 		setTextAndBackgroundColor(BLACK, WHITE);
 		cout << ("  ");
 	}

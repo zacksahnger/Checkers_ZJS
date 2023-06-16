@@ -24,17 +24,12 @@ public:
 	Board();
 	void printBoard();
 	void setTextAndBackgroundColor(int textColor, int textBackgroundColor);
-	//vector<Piece> pieces;
 	Piece pieces[8][8];
 	
 
 private:
 	void populatePieces();
-	//void printWhiteSquare(int rowIndex, int colIndex);
-	//void printBlackSquare( int rowIndex, int colIndex);
 	void printSquare(int rowIndex, int colIndex);
-	void printRowBlackFirst();
-	void printRowWhiteFirst();
 	void printRow(int columnIndex);
 	bool checkPositionForPiece(int rowPosition, int colPosition);
 	Piece getPieceInfo(int rowPosition, int colPosition);
