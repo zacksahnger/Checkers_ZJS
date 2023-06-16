@@ -54,8 +54,14 @@ void Game::mainGameLoop() {
 		//if (userInput.size() > 2) { //need at least 3 input characters for correct format.
 		rowCurrent = charToInt(userInput[0]);
 		colCurrent = charToInt(userInput[2]);
-		//}
+
 		cout << rowCurrent << "," << colCurrent << endl;
+		if ((rowCurrent > 7 || rowCurrent < 0) || (colCurrent > 7 || colCurrent < 0)) {
+			cout << "Invalid move! please try again!" << endl;
+			continue;
+		}
+		//}
+
 		Piece selectedPiece = this->gameBoard.pieces[rowCurrent][colCurrent];
 		if (selectedPiece.getType() == SPACE) {
 			cout << "Invalid move! please try again!" << endl;
@@ -74,6 +80,10 @@ void Game::mainGameLoop() {
 			colTarget = charToInt(userInput[2]);
 		//}
 		cout << rowTarget << "," << colTarget << endl;
+		if ((rowTarget > 7 || rowTarget < 0) || (colTarget > 7 || colTarget < 0)) {
+			cout << "Invalid move! please try again!" << endl;
+			continue;
+		}
 
 		//pull this all into a method "checkMoveValidity"
 
@@ -83,6 +93,7 @@ void Game::mainGameLoop() {
 			cout << "Invalid move! please try again!" << endl;
 			continue;
 		}
+
 
 			if ((isBlueTurn && selectedPiece.getColor() == LIGHTBLUE) || (!isBlueTurn && selectedPiece.getColor() == LIGHTRED)) {
 
