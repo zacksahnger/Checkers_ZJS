@@ -26,8 +26,6 @@ int main() {
 	gameBoard.printBoard();
 
 	Piece testPiece;
-	vector<int> position = testPiece.getPosition();
-	cout << position[0] << position[1] << endl;
 	
 
 }

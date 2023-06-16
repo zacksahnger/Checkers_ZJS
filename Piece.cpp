@@ -6,35 +6,15 @@
 */
 
 #include"Piece.h"
-#include <vector>
-using std::vector;
 
-Piece::Piece() { //overload for cases without color provided
+
+Piece::Piece() {
 	this->color = -1;
-	this->position.push_back(-1);
-	this->position.push_back(-1);
 }
-Piece::Piece(int color) { //overload for cases without color provided
+Piece::Piece(int color) { //overload for cases with color provided
 	this->color = color;
-	this->position.push_back(-1);
-	this->position.push_back(-1);
-}
-Piece::Piece(vector<int> position) { //overload for cases without color provided
-	this->color = -1;
-	this->position = position;
 }
 
-Piece::Piece(int color, vector<int> position) { //overload for cases without color provided
-	this->color = color;
-	this->position = position;
-}
-
-vector<int> Piece::getPosition() {
-	return this->position;
-}
-void Piece::setPosition(vector<int> position) {
-	this->position = position;
-}
 
 int Piece::getColor() {
 	return this->color;
