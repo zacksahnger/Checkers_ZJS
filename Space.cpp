@@ -23,3 +23,7 @@ bool Space::canMoveBackwards() {
 char Space::pieceRepresentation(){
 	return ' ';
 }
+
+int Space::getColor() {
+	return this->color;
+}

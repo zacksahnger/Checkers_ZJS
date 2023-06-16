@@ -12,6 +12,7 @@ public:
 	bool canMoveForwards();
 	bool canMoveBackwards();
 	char pieceRepresentation();
+	int getColor();
 private:
 	int color; //doesn't really matter
 };

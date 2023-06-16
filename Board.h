@@ -8,6 +8,9 @@
 #include <iostream>
 #include<windows.h>
 #include "Piece.h"
+
+#include<vector>
+using std::vector;
 /*
 class Board {
 
@@ -24,15 +27,17 @@ public:
 	Board();
 	void printBoard();
 	void setTextAndBackgroundColor(int textColor, int textBackgroundColor);
-	Piece pieces[8][8];
+	//Space pieces[8][8];
+	vector<vector<Space*>> spaces;
 	
 
 private:
+	void populateSpaces();
 	void populatePieces();
 	void printSquare(int rowIndex, int colIndex);
 	void printRow(int columnIndex);
 	bool checkPositionForPiece(int rowPosition, int colPosition);
-	Piece getPieceInfo(int rowPosition, int colPosition);
+	Space* getSpaceInfo(int rowPosition, int colPosition);
 
 	
 };

@@ -7,7 +7,7 @@
 */
 #include "Space.h"
 
-class Piece : Space {
+class Piece : public Space {
 public:
 	
 	Piece();

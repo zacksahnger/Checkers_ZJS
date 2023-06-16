@@ -21,17 +21,16 @@ using std::endl;
 HANDLE  hConsole; //represents resource managed by windows kernel. used to access/modify console output.
 
 
-
-
 //constructor
 Board::Board() {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	spaces.reserve(8);
+	populateSpaces();
 	populatePieces();
 }
 
 void Board::setTextAndBackgroundColor(int textColor, int textBackgroundColor) {
-	//int textColor = 7;
-	//int textBackgroundColor = 0;
 	int ColorAttribute = textColor + (textBackgroundColor * 16);
 	SetConsoleTextAttribute(hConsole, ColorAttribute);
 }
@@ -43,9 +42,9 @@ void Board::printSquare(int rowIndex, int colIndex) {
 		
 		if (checkPositionForPiece(rowIndex, colIndex)) {
 			//set color
-			setTextAndBackgroundColor(pieces[rowIndex][colIndex].getColor(), BLACK);
+			setTextAndBackgroundColor(spaces[rowIndex][colIndex]->getColor(), BLACK);
 			//check if type is man or king 
-			cout << "O" << " ";
+			cout << spaces[rowIndex][colIndex]->pieceRepresentation() << " ";
 		}
 		else {
 			setTextAndBackgroundColor(WHITE, BLACK);
@@ -83,6 +82,18 @@ void Board::printBoard() {
 	cout << endl;
 }
 
+void Board::populateSpaces() {
+	vector<Space*> tmp;
+	for (int i = 0; i < 8; i++) {
+		Space* s = new Space();
+		tmp.push_back(s);
+	}
+	for (int i = 0; i < 8; i++) {
+		
+		spaces.push_back(tmp);
+	}
+}
+
 void Board::populatePieces() {
 
 	//instantiate / set piece positions
@@ -93,10 +104,19 @@ void Board::populatePieces() {
 			if (rowIndex != 3 && rowIndex != 4) { //don't populate center rows with pieces
 			
 				if ((rowIndex + columnIndex) % 2) {
-					if (rowIndex < 3)
-						this->pieces[rowIndex][columnIndex] = Piece(LIGHTRED);
-					else
-						this->pieces[rowIndex][columnIndex] = Piece(GRAY);
+					if (rowIndex < 3) {
+						Piece* p = new Piece(LIGHTRED);
+						this->spaces[rowIndex][columnIndex] = p;//Piece(LIGHTRED);
+					}
+
+					else {
+						Piece* p = new Piece(GRAY);
+						this->spaces[rowIndex][columnIndex] = p;
+					}
+
+				}
+				else {
+					//this->spaces[rowIndex][columnIndex] = Space();
 				}
 					
 			}
@@ -106,14 +126,14 @@ void Board::populatePieces() {
 }
 
 bool Board::checkPositionForPiece(int rowPosition, int colPosition) {
-	if (this->pieces[rowPosition][colPosition].getColor() != -1) {
+	if (this->spaces[rowPosition][colPosition]->getColor() != -1) {
 		return true;
 	}
 	return false;
 
 }
-Piece Board::getPieceInfo(int rowPosition, int colPosition) {
-	return this->pieces[rowPosition][colPosition];
+Space* Board::getSpaceInfo(int rowPosition, int colPosition) {
+	return this->spaces[rowPosition][colPosition];
 }
 /*
 int Board::checkPositionForPiece(vector<int>position) {

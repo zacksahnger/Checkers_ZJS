@@ -7,7 +7,7 @@
 */
 #include "Piece.h"
 
-class KingPiece : Piece {
+class KingPiece : public Piece {
 
 	KingPiece();
 	KingPiece(int color); //constructor
