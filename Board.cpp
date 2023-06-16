@@ -77,8 +77,10 @@ void Board::printBoard() {
 		cout << rowIndex << " ";
 		printRow(rowIndex);
 	}
-	cout << endl;
+	
 	setTextAndBackgroundColor(WHITE, BLACK);
+	cout << "  A B C D E F G H";
+	cout << endl;
 }
 
 void Board::populatePieces() {

@@ -19,7 +19,7 @@ using std::endl;
 
 int main() {
 
-	cout << ("Hello world!") << std::endl;
+	//cout << ("Hello world!") << std::endl;
 
 	Board gameBoard;
 
