@@ -88,9 +88,9 @@ void Game::mainGameLoop() {
 
 
 					int rowJumpDirection = (rowTarget - rowCurrent) / abs(rowTarget - rowCurrent);
-					int jumpedSquareRow = rowCurrent + 1*rowJumpDirection;
+					int jumpedSquareRow = rowCurrent + rowJumpDirection;
 					int colJumpDirection = (colTarget - colCurrent) / abs(colTarget - colCurrent);
-					int jumpedSquareCol = colCurrent + 1*colJumpDirection;
+					int jumpedSquareCol = colCurrent + colJumpDirection;
 
 					//cout << "Jumped piece row,col: " << jumpedSquareCol << "," << jumpedSquareCol << endl; //doesn't work but it does.
 					this->gameBoard.pieces[jumpedSquareRow][jumpedSquareCol].setType(SPACE);// remove jumped piece
