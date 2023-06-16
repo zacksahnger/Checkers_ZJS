@@ -50,11 +50,17 @@ void Game::mainGameLoop() {
 		cout << "Please input the coordinates of the piece you'd like to move (row,col)" << endl;
 		cin >> userInput;
 
+
 		//if (userInput.size() > 2) { //need at least 3 input characters for correct format.
-			rowCurrent = charToInt(userInput[0]);
-			colCurrent = charToInt(userInput[2]);
+		rowCurrent = charToInt(userInput[0]);
+		colCurrent = charToInt(userInput[2]);
 		//}
 		cout << rowCurrent << "," << colCurrent << endl;
+		Piece selectedPiece = this->gameBoard.pieces[rowCurrent][colCurrent];
+		if (selectedPiece.getType() == SPACE) {
+			cout << "Invalid move! please try again!" << endl;
+			continue;
+		}
 
 		/*if (!validateUserInput(userInput)) {
 			cout << "invalid input! please try again!" << endl;
@@ -70,10 +76,14 @@ void Game::mainGameLoop() {
 		cout << rowTarget << "," << colTarget << endl;
 
 		//pull this all into a method "checkMoveValidity"
-		Piece selectedPiece = this->gameBoard.pieces[rowCurrent][colCurrent];
+
 		Piece targetPiece = this->gameBoard.pieces[rowTarget][colTarget];
 		
-		if (selectedPiece.getType() != SPACE) {
+		if (targetPiece.getType() != SPACE) {
+			cout << "Invalid move! please try again!" << endl;
+			continue;
+		}
+
 			if ((isBlueTurn && selectedPiece.getColor() == LIGHTBLUE) || (!isBlueTurn && selectedPiece.getColor() == LIGHTRED)) {
 
 				if ((float)(sqrt(pow(colCurrent - rowCurrent, 2) + pow(colTarget - rowTarget, 2))) < 2) {
@@ -100,7 +110,7 @@ void Game::mainGameLoop() {
 				} //jump
 
 			} //if turn and piece color is valid
-		} //if selected piece exists
+	//	} //if selected piece exists
 
 
 		//check if anyone is out of pieces.
