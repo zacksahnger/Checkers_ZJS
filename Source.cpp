@@ -2,7 +2,8 @@
 * Filename: Source.cpp
 * Author: Zachary Sahnger
 * Date: 6/14/2023
-* Description: This source file contains the implementation of a program that 
+* Description: This source file contains the implementation of a program that allows two players to play checkers
+* in the console
 */
 
 #include <iostream>
@@ -10,7 +11,7 @@
 #include <windows.h>
 #include "Board.h"
 #include "Piece.h"
-//#include "ManPiece.h"
+#include "Game.h"
 #include<vector>
 
 using std::cout;
@@ -21,11 +22,9 @@ int main() {
 
 	cout << ("Hello world!") << std::endl;
 
-	Board gameBoard;
 
-	gameBoard.printBoard();
+	Game myGame;
+	myGame.startGame();
 
-	Piece testPiece;
-	
-
+	return 0;
 }
